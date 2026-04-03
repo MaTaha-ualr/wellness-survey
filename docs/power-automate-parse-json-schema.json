@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "properties": {
+    "submissionId": {
+      "type": "string"
+    },
+    "submittedAt": {
+      "type": "string"
+    },
+    "pageUrl": {
+      "type": "string"
+    },
+    "userAgent": {
+      "type": "string"
+    },
+    "row": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "answers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "audioRecordings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "questionId": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "base64": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "questionId",
+          "fileName",
+          "mimeType",
+          "base64"
+        ]
+      }
+    }
+  },
+  "required": [
+    "submissionId",
+    "submittedAt",
+    "pageUrl",
+    "userAgent",
+    "row",
+    "answers",
+    "audioRecordings"
+  ]
+}

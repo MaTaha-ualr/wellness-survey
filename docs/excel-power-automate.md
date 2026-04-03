@@ -44,6 +44,7 @@ Suggested columns:
 
 1. Trigger: `When an HTTP request is received`
 2. Action: `Parse JSON`
+   Use the schema in `docs/power-automate-parse-json-schema.json`
 3. Optional loop: `Apply to each` over `audioRecordings`
 4. Optional file action: create an audio file in OneDrive or SharePoint from `base64`
 5. Action: `Add a row into a table`
