@@ -40,6 +40,10 @@ Suggested columns:
 - `audio_question_ids`
 - `audio_file_names`
 
+You can copy the exact header row from:
+
+- `docs/excel-table-columns.csv`
+
 ## Flow outline
 
 1. Trigger: `When an HTTP request is received`
@@ -48,6 +52,10 @@ Suggested columns:
 3. Optional loop: `Apply to each` over `audioRecordings`
 4. Optional file action: create an audio file in OneDrive or SharePoint from `base64`
 5. Action: `Add a row into a table`
+
+For the exact column-to-expression mapping, use:
+
+- `docs/power-automate-field-mapping.md`
 
 ## Payload shape
 

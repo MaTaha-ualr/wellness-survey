@@ -12,4 +12,4 @@ npm run check
 
 Deployment and submission setup notes are in [app/README.md](./app/README.md).
 
-Excel storage notes for a Power Automate workflow are in [docs/excel-power-automate.md](./docs/excel-power-automate.md), with a matching Parse JSON schema in [docs/power-automate-parse-json-schema.json](./docs/power-automate-parse-json-schema.json).
+Excel storage notes for a Power Automate workflow are in [docs/excel-power-automate.md](./docs/excel-power-automate.md), with a matching Parse JSON schema in [docs/power-automate-parse-json-schema.json](./docs/power-automate-parse-json-schema.json), an Excel header template in [docs/excel-table-columns.csv](./docs/excel-table-columns.csv), and exact row mappings in [docs/power-automate-field-mapping.md](./docs/power-automate-field-mapping.md).
