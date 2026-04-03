@@ -9,8 +9,8 @@ This app is a production-ready Vite + React survey for collecting anonymous yout
 - GitHub Pages deployment workflow from the `app/` directory
 - GitHub Pages-safe asset paths
 - Mobile-friendly layouts for intro, survey, and thank-you screens
-- Real submission handling through a configurable endpoint
-- Excel-friendly JSON payloads for Power Automate or a similar webhook
+- Real submission handling through Supabase or a configurable webhook
+- Excel-friendly JSON payloads for Power Automate if you still want a spreadsheet flow
 
 ## Local development
 
@@ -33,26 +33,35 @@ npm run build
 
 ## Required environment variable
 
-Create `app/.env` from `app/.env.example` and set:
+Create `app/.env` from `app/.env.example`.
+
+Recommended:
+
+```bash
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
+```
+
+Fallback webhook option:
 
 ```bash
 VITE_SURVEY_SUBMIT_URL=https://your-survey-endpoint.example.com/api/surveys
 ```
 
-This app will not silently fake successful submissions anymore. If `VITE_SURVEY_SUBMIT_URL` is missing, the UI shows a submission error instead of dropping data.
+This app will not silently fake successful submissions anymore. If neither Supabase nor the webhook is configured, the UI shows a submission error instead of dropping data.
 
 ## Submission contract
 
-On submit, the frontend sends a `POST` request as JSON to `VITE_SURVEY_SUBMIT_URL`.
-
-The request body includes:
+On submit, the frontend builds a JSON payload containing:
 
 - `submissionId`, `submittedAt`, `pageUrl`, `userAgent`
-- `row`: a flat key/value object ready to map into one Excel table row
+- `row`: a flat key/value object ready to inspect or map into another system
 - `answers`: formatted answers by question id
 - `audioRecordings`: optional base64-encoded audio files with `questionId`, `fileName`, and `mimeType`
 
-That payload shape is intended for Power Automate or any webhook that will map values into Excel.
+If Supabase is configured, the app inserts that payload into the `survey_responses` table.
+
+If Supabase is not configured and `VITE_SURVEY_SUBMIT_URL` is set, the app sends the same payload to your webhook.
 
 ## GitHub Pages deployment
 
@@ -62,10 +71,26 @@ Before turning the site live:
 
 1. Push the repo to GitHub.
 2. In GitHub, go to `Settings -> Pages` and set the source to `GitHub Actions`.
-3. In `Settings -> Secrets and variables -> Actions -> Variables`, add `VITE_SURVEY_SUBMIT_URL`.
+3. In `Settings -> Secrets and variables -> Actions -> Variables`, add either:
+   `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`
+   or `VITE_SURVEY_SUBMIT_URL`
 4. Push to `main`.
 
-`VITE_` variables are embedded into the client bundle, so use a repository variable, not a secret, unless you are proxying through a private backend URL.
+`VITE_` variables are embedded into the client bundle, so use repository variables. For Supabase, this is expected: the client key is designed to work with Row Level Security.
+
+## Recommended storage path
+
+If you just want responses stored and readable, use Supabase.
+
+Setup notes:
+
+- `docs/supabase-setup.md`
+
+That keeps hosting simple:
+
+1. GitHub Pages for the frontend
+2. Supabase for storage
+3. Supabase dashboard for reading/exporting responses
 
 ## Excel storage path
 

@@ -8,6 +8,7 @@ import {
   type SurveyAnswers,
 } from '@/data/survey';
 import { buildSubmissionPayload } from '@/lib/submission';
+import { hasSupabaseStorage, saveSubmissionToSupabase } from '@/lib/supabase';
 import { IntroScreen } from '@/sections/IntroScreen';
 import { QuestionScreen } from '@/sections/QuestionScreen';
 import { ThankYouScreen } from '@/sections/ThankYouScreen';
@@ -136,9 +137,9 @@ function App() {
   }, []);
 
   const handleSubmit = useCallback(async () => {
-    if (!SUBMISSION_ENDPOINT) {
+    if (!hasSupabaseStorage() && !SUBMISSION_ENDPOINT) {
       setSubmissionError(
-        'Submission is not configured yet. Set VITE_SURVEY_SUBMIT_URL before publishing this survey.',
+        'Submission is not configured yet. Set Supabase variables or VITE_SURVEY_SUBMIT_URL before publishing this survey.',
       );
       return;
     }
@@ -148,16 +149,21 @@ function App() {
 
     try {
       const payload = await buildSubmissionPayload(answers, otherTexts, audioRecordings);
-      const response = await fetch(SUBMISSION_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
 
-      if (!response.ok) {
-        throw new Error(`Submission failed with status ${response.status}`);
+      if (hasSupabaseStorage()) {
+        await saveSubmissionToSupabase(payload);
+      } else {
+        const response = await fetch(SUBMISSION_ENDPOINT!, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Submission failed with status ${response.status}`);
+        }
       }
 
       setScreen('thanks');
