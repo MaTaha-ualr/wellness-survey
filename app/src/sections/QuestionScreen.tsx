@@ -47,6 +47,12 @@ export function QuestionScreen({
   const contentRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const questionsScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    questionsScrollRef.current?.scrollTo({ top: 0, behavior: 'auto' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [section.id]);
 
   useEffect(() => {
     const context = gsap.context(() => {
@@ -134,7 +140,10 @@ export function QuestionScreen({
                 <p className={`mt-2 text-sm xl:text-base ${isDarkTone ? 'text-navy/70' : 'text-white/70'}`}>{section.subtitle}</p>
               </div>
 
-              <div className="custom-scrollbar flex-1 space-y-4 overflow-y-auto pr-1 sm:pr-2 xl:min-h-0 xl:pr-3">
+              <div
+                ref={questionsScrollRef}
+                className="custom-scrollbar flex-1 space-y-4 overflow-y-auto pr-1 sm:pr-2 xl:min-h-0 xl:pr-3"
+              >
                 {section.questions.map((question) => (
                   <QuestionCard
                     key={question.id}

@@ -21,6 +21,7 @@ function getToneClasses(tone: 'light' | 'dark' = 'light') {
       hintText: 'text-navy/55',
       questionText: 'text-navy',
       itemText: 'text-navy/80',
+      scaleButtonText: 'text-navy/75 hover:text-navy',
       inputClass:
         'ml-8 rounded-xl border-2 border-navy/15 bg-white/25 px-4 py-2.5 text-sm text-navy placeholder:text-navy/45 transition-all focus:border-navy focus:outline-none',
       cardClass: 'border-navy/10 bg-white/25',
@@ -32,6 +33,7 @@ function getToneClasses(tone: 'light' | 'dark' = 'light') {
     hintText: 'text-white/40',
     questionText: 'text-white',
     itemText: 'text-white/80',
+    scaleButtonText: '',
     inputClass:
       'ml-8 rounded-xl border-2 border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40 transition-all focus:border-coral focus:outline-none',
     cardClass: 'border-white/8 bg-white/8',
@@ -150,7 +152,11 @@ export function ScaleQuestion({ question, value, onChange, tone = 'light' }: Que
               <button
                 key={label}
                 onClick={() => onChange({ ...matrixValue, [itemIndex]: labelIndex })}
-                className={cn('scale-btn', matrixValue[itemIndex] === labelIndex && 'active')}
+                className={cn(
+                  'scale-btn',
+                  toneClasses.scaleButtonText,
+                  matrixValue[itemIndex] === labelIndex && 'active',
+                )}
               >
                 {label}
               </button>
@@ -176,7 +182,11 @@ export function LikertQuestion({ question, value, onChange, tone = 'light' }: Qu
               <button
                 key={label}
                 onClick={() => onChange({ ...matrixValue, [itemIndex]: labelIndex })}
-                className={cn('scale-btn', matrixValue[itemIndex] === labelIndex && 'active')}
+                className={cn(
+                  'scale-btn',
+                  toneClasses.scaleButtonText,
+                  matrixValue[itemIndex] === labelIndex && 'active',
+                )}
               >
                 {label}
               </button>
