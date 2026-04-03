@@ -24,6 +24,7 @@ export interface SurveySection {
   image: string;
   panelColor: string;
   imagePosition: 'left' | 'right';
+  tone?: 'light' | 'dark';
 }
 
 export type MatrixAnswer = Record<string, number>;
@@ -47,6 +48,7 @@ export const SURVEY_SECTIONS: SurveySection[] = [
     image: resolvePublicAsset('images/about_you_photo.jpg'),
     panelColor: 'bg-panel-teal',
     imagePosition: 'right',
+    tone: 'light',
     questions: [
       {
         id: 'q1',
@@ -90,6 +92,7 @@ export const SURVEY_SECTIONS: SurveySection[] = [
     image: resolvePublicAsset('images/feeling_photo.jpg'),
     panelColor: 'bg-panel-purple',
     imagePosition: 'left',
+    tone: 'light',
     questions: [
       {
         id: 'q4',
@@ -138,6 +141,7 @@ export const SURVEY_SECTIONS: SurveySection[] = [
     image: resolvePublicAsset('images/support_photo.jpg'),
     panelColor: 'bg-panel-yellow',
     imagePosition: 'right',
+    tone: 'dark',
     questions: [
       {
         id: 'q6',
@@ -198,6 +202,7 @@ export const SURVEY_SECTIONS: SurveySection[] = [
     image: resolvePublicAsset('images/want_photo.jpg'),
     panelColor: 'bg-panel-pink',
     imagePosition: 'left',
+    tone: 'light',
     questions: [
       {
         id: 'q9',
@@ -257,6 +262,7 @@ export const SURVEY_SECTIONS: SurveySection[] = [
     image: resolvePublicAsset('images/engage_photo.jpg'),
     panelColor: 'bg-panel-blue',
     imagePosition: 'right',
+    tone: 'light',
     questions: [
       {
         id: 'q12',
@@ -306,6 +312,7 @@ export const SURVEY_SECTIONS: SurveySection[] = [
     image: resolvePublicAsset('images/voice_photo.jpg'),
     panelColor: 'bg-panel-purple',
     imagePosition: 'left',
+    tone: 'light',
     questions: [
       {
         id: 'q14',

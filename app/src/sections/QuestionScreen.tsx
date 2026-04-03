@@ -76,6 +76,7 @@ export function QuestionScreen({
 
   const isImageLeft = section.imagePosition === 'left';
   const isLastSection = sectionIndex === totalSections - 1;
+  const isDarkTone = section.tone === 'dark';
   const orbOffsetClass = isImageLeft ? 'right-4 xl:-right-9' : 'left-4 xl:-left-9';
   const headerPaddingClass = isImageLeft ? 'pr-16 xl:pr-24' : 'pl-16 xl:pl-24';
 
@@ -126,11 +127,11 @@ export function QuestionScreen({
             <div ref={contentRef} className="flex h-full min-h-0 flex-col">
               <div className={`mb-5 ${headerPaddingClass}`}>
                 <h2
-                  className="font-poppins text-[clamp(24px,5vw,42px)] font-bold uppercase leading-tight tracking-tight text-white"
+                  className={`font-poppins text-[clamp(24px,5vw,42px)] font-bold uppercase leading-tight tracking-tight ${isDarkTone ? 'text-navy' : 'text-white'}`}
                 >
                   {section.title}
                 </h2>
-                <p className="mt-2 text-sm text-white/70 xl:text-base">{section.subtitle}</p>
+                <p className={`mt-2 text-sm xl:text-base ${isDarkTone ? 'text-navy/70' : 'text-white/70'}`}>{section.subtitle}</p>
               </div>
 
               <div className="custom-scrollbar flex-1 space-y-4 overflow-y-auto pr-1 sm:pr-2 xl:min-h-0 xl:pr-3">
@@ -144,11 +145,12 @@ export function QuestionScreen({
                     onOtherTextChange={(text) => onOtherTextChange(question.id, text)}
                     audioRecording={audioRecordings[question.id]}
                     onAudioRecordingChange={(recording) => onAudioRecordingChange(question.id, recording)}
+                    tone={section.tone}
                   />
                 ))}
               </div>
 
-              <div className="mt-5 border-t border-white/10 pt-4 xl:pt-5">
+              <div className={`mt-5 border-t pt-4 xl:pt-5 ${isDarkTone ? 'border-navy/10' : 'border-white/10'}`}>
                 {submissionError && (
                   <div className="mb-4 rounded-2xl border border-red-300/30 bg-red-500/15 px-4 py-3 text-sm text-red-50">
                     {submissionError}
