@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 234 48% 21%;
+    --foreground: 0 0% 100%;
+    --card: 234 48% 21%;
+    --card-foreground: 0 0% 100%;
+    --popover: 234 48% 21%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 6 78% 83%;
+    --primary-foreground: 234 48% 21%;
+    --secondary: 248 100% 68%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 234 30% 30%;
+    --muted-foreground: 0 0% 100% / 0.72;
+    --accent: 6 78% 83%;
+    --accent-foreground: 234 48% 21%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 234 30% 35%;
+    --input: 234 30% 35%;
+    --ring: 6 78% 83%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-navy text-white font-inter antialiased;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Panel styles */
+  .panel {
+    @apply rounded-[clamp(28px,3.2vw,52px)] shadow-panel;
+  }
+
+  /* Emoji Orb */
+  .emoji-orb {
+    @apply w-[clamp(64px,8vw,100px)] h-[clamp(64px,8vw,100px)] rounded-full flex items-center justify-center text-[clamp(28px,3.5vw,48px)];
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.8);
+  }
+
+  /* Progress Pill */
+  .progress-pill {
+    @apply h-11 rounded-full bg-white/10 backdrop-blur-sm flex items-center px-4 gap-3;
+    min-width: min(28vw, 320px);
+  }
+
+  .progress-bar {
+    @apply h-2 flex-1 rounded-full bg-white/20 overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full rounded-full bg-coral transition-all duration-500;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply px-8 py-4 bg-coral text-navy font-semibold rounded-2xl shadow-button transition-all duration-200;
+  }
+  .btn-primary:hover {
+    @apply scale-105 shadow-lg;
+  }
+  .btn-primary:active {
+    @apply scale-100;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-white/10 text-white font-medium rounded-xl border border-white/20 transition-all duration-200;
+  }
+  .btn-secondary:hover {
+    @apply bg-white/20;
+  }
+
+  /* Question option styles */
+  .option-btn {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-white/15 bg-white/5 text-left transition-all duration-200 flex items-center gap-3 hover:border-white/30 hover:bg-white/10;
+  }
+  .option-btn.selected {
+    @apply border-coral bg-coral/15;
+  }
+
+  /* Radio dot */
+  .radio-dot {
+    @apply w-5 h-5 rounded-full border-2 border-white/40 bg-transparent transition-all duration-200 flex-shrink-0;
+  }
+  .option-btn.selected .radio-dot {
+    @apply border-coral bg-coral;
+  }
+
+  /* Checkbox */
+  .checkbox {
+    @apply w-5 h-5 rounded-md border-2 border-white/40 bg-transparent transition-all duration-200 flex items-center justify-center flex-shrink-0;
+  }
+  .option-btn.selected .checkbox {
+    @apply border-coral bg-coral;
+  }
+
+  /* Scale buttons */
+  .scale-btn {
+    @apply px-2 py-2 rounded-lg border border-white/15 bg-white/5 text-xs text-white/60 transition-all duration-200 flex-1 text-center hover:border-white/30 hover:bg-white/10;
+  }
+  .scale-btn.active {
+    @apply border-coral bg-coral/15 text-coral font-semibold;
+  }
+
+  /* Textarea */
+  .survey-textarea {
+    @apply w-full p-4 rounded-xl border-2 border-white/15 bg-white/5 text-white placeholder:text-white/40 resize-none transition-all duration-200;
+    min-height: 120px;
+  }
+  .survey-textarea:focus {
+    @apply border-coral bg-white/10 outline-none;
+  }
+
+  /* Custom scrollbar for panels */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Noise overlay */
+  .noise-overlay::before {
+    content: '';
+    @apply fixed inset-0 pointer-events-none z-50;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Hide scrollbar */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Perspective */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* Float animation for hearts */
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(5deg);
+    }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 3s ease-in-out infinite;
+  }
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(246, 183, 176, 0.4);
+  color: white;
+}
+
+/* Focus styles */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #F6B7B0;
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+  .panel {
+    border-radius: 24px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .emoji-orb {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 24px !important;
+  }
+}
