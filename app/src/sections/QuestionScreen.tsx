@@ -76,11 +76,13 @@ export function QuestionScreen({
 
   const isImageLeft = section.imagePosition === 'left';
   const isLastSection = sectionIndex === totalSections - 1;
+  const orbOffsetClass = isImageLeft ? 'right-4 xl:-right-9' : 'left-4 xl:-left-9';
+  const headerPaddingClass = isImageLeft ? 'pr-16 xl:pr-24' : 'pl-16 xl:pl-24';
 
   return (
     <div
       ref={containerRef}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-navy px-4 pb-24 pt-20 sm:px-6 lg:px-8"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-navy px-4 pb-24 pt-20 sm:px-6 xl:px-10"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
@@ -91,10 +93,10 @@ export function QuestionScreen({
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-stretch gap-6 lg:flex-row lg:items-center">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-stretch gap-6 xl:flex-row xl:items-stretch xl:gap-10">
         <div
           ref={imageRef}
-          className={`relative h-64 w-full overflow-hidden rounded-[32px] shadow-2xl sm:h-80 lg:h-[480px] lg:w-[320px] ${isImageLeft ? 'lg:order-1' : 'lg:order-2'}`}
+          className={`relative h-72 w-full overflow-hidden rounded-[32px] shadow-2xl sm:h-96 xl:h-[560px] xl:w-[380px] 2xl:w-[420px] ${isImageLeft ? 'xl:order-1' : 'xl:order-2'}`}
         >
           <img src={section.image} alt={section.title} className="h-full w-full object-cover" />
           <div className={`absolute inset-0 ${section.panelColor}/40 mix-blend-multiply`} />
@@ -111,55 +113,57 @@ export function QuestionScreen({
 
         <div
           ref={panelRef}
-          className={`relative w-full overflow-hidden rounded-[32px] ${section.panelColor} p-5 shadow-panel sm:p-6 lg:h-[480px] lg:w-[520px] lg:rounded-[36px] lg:p-8 ${isImageLeft ? 'lg:order-2' : 'lg:order-1'}`}
+          className={`relative w-full ${isImageLeft ? 'xl:order-2' : 'xl:order-1'} xl:flex-1`}
         >
-          <div className={`absolute -top-6 z-20 ${isImageLeft ? '-right-2 sm:-right-6' : '-left-2 sm:-left-6'}`}>
-            <EmojiOrb emoji={section.emoji} color="bg-white" />
+          <div className={`pointer-events-none absolute -top-7 z-30 ${orbOffsetClass} xl:-top-9`}>
+            <EmojiOrb emoji={section.emoji} />
           </div>
 
-          <div className="absolute right-0 top-0 h-24 w-24 translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5" />
-          <div className="absolute bottom-0 left-0 h-16 w-16 -translate-x-1/2 translate-y-1/2 rounded-full bg-white/5" />
+          <div className={`relative flex min-h-[440px] flex-col overflow-hidden rounded-[32px] ${section.panelColor} p-5 shadow-panel sm:p-6 xl:min-h-[560px] xl:rounded-[40px] xl:p-10`}>
+            <div className="absolute right-0 top-0 h-28 w-28 translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 xl:h-36 xl:w-36" />
+            <div className="absolute bottom-0 left-0 h-20 w-20 -translate-x-1/2 translate-y-1/2 rounded-full bg-white/5 xl:h-28 xl:w-28" />
 
-          <div ref={contentRef} className="flex h-full flex-col">
-            <div className="mb-4 pr-10">
-              <h2
-                className="font-poppins text-[clamp(24px,5vw,36px)] font-bold uppercase leading-tight tracking-tight text-white"
-              >
-                {section.title}
-              </h2>
-              <p className="mt-1 text-sm text-white/70">{section.subtitle}</p>
-            </div>
+            <div ref={contentRef} className="flex h-full flex-col">
+              <div className={`mb-5 ${headerPaddingClass}`}>
+                <h2
+                  className="font-poppins text-[clamp(24px,5vw,42px)] font-bold uppercase leading-tight tracking-tight text-white"
+                >
+                  {section.title}
+                </h2>
+                <p className="mt-2 text-sm text-white/70 xl:text-base">{section.subtitle}</p>
+              </div>
 
-            <div className="custom-scrollbar flex-1 space-y-3 overflow-y-auto pr-1 sm:pr-2">
-              {section.questions.map((question) => (
-                <QuestionCard
-                  key={question.id}
-                  question={question}
-                  value={answers[question.id]}
-                  onChange={(value) => onAnswerChange(question.id, value)}
-                  otherText={otherTexts[question.id]}
-                  onOtherTextChange={(text) => onOtherTextChange(question.id, text)}
-                  audioRecording={audioRecordings[question.id]}
-                  onAudioRecordingChange={(recording) => onAudioRecordingChange(question.id, recording)}
+              <div className="custom-scrollbar flex-1 space-y-4 overflow-y-auto pr-1 sm:pr-2 xl:pr-3">
+                {section.questions.map((question) => (
+                  <QuestionCard
+                    key={question.id}
+                    question={question}
+                    value={answers[question.id]}
+                    onChange={(value) => onAnswerChange(question.id, value)}
+                    otherText={otherTexts[question.id]}
+                    onOtherTextChange={(text) => onOtherTextChange(question.id, text)}
+                    audioRecording={audioRecordings[question.id]}
+                    onAudioRecordingChange={(recording) => onAudioRecordingChange(question.id, recording)}
+                  />
+                ))}
+              </div>
+
+              <div className="mt-5 border-t border-white/10 pt-4 xl:pt-5">
+                {submissionError && (
+                  <div className="mb-4 rounded-2xl border border-red-300/30 bg-red-500/15 px-4 py-3 text-sm text-red-50">
+                    {submissionError}
+                  </div>
+                )}
+
+                <Navigation
+                  onBack={onBack}
+                  onNext={onNext}
+                  onSubmit={onSubmit}
+                  showBack={true}
+                  showSubmit={isLastSection}
+                  isSubmitting={isSubmitting}
                 />
-              ))}
-            </div>
-
-            <div className="mt-4 border-t border-white/10 pt-4">
-              {submissionError && (
-                <div className="mb-4 rounded-2xl border border-red-300/30 bg-red-500/15 px-4 py-3 text-sm text-red-50">
-                  {submissionError}
-                </div>
-              )}
-
-              <Navigation
-                onBack={onBack}
-                onNext={onNext}
-                onSubmit={onSubmit}
-                showBack={true}
-                showSubmit={isLastSection}
-                isSubmitting={isSubmitting}
-              />
+              </div>
             </div>
           </div>
         </div>

@@ -115,7 +115,7 @@ export function ScaleQuestion({ question, value, onChange }: QuestionProps) {
       {question.items?.map((item, itemIndex) => (
         <div key={item} className="flex flex-col gap-2">
           <div className="text-sm font-medium text-white/80">{item}</div>
-          <div className="flex flex-wrap gap-1">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-5">
             {question.scaleLabels?.map((label, labelIndex) => (
               <button
                 key={label}
@@ -140,7 +140,7 @@ export function LikertQuestion({ question, value, onChange }: QuestionProps) {
       {question.items?.map((item, itemIndex) => (
         <div key={item} className="flex flex-col gap-2">
           <div className="text-sm font-medium text-white/80">{item}</div>
-          <div className="flex flex-wrap gap-1">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-5">
             {question.likertLabels?.map((label, labelIndex) => (
               <button
                 key={label}
@@ -215,7 +215,7 @@ export function QuestionCard({
   onAudioRecordingChange,
 }: QuestionProps) {
   return (
-    <div className="rounded-2xl border border-white/8 bg-white/8 p-4 backdrop-blur-sm">
+    <div className="rounded-2xl border border-white/8 bg-white/8 p-4 backdrop-blur-sm xl:p-5">
       <div className="mb-3 flex items-center gap-2">
         <div className="inline-flex items-center rounded-full bg-coral/20 px-2.5 py-1 text-xs font-bold text-coral">
           Q{question.num}

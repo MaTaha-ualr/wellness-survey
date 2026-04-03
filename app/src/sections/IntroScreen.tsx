@@ -76,7 +76,7 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
   return (
     <div
       ref={containerRef}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-navy px-4 py-12 sm:px-6 lg:px-8"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-navy px-4 py-12 sm:px-6 xl:px-10"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-10 top-20 h-64 w-64 rounded-full bg-panel-purple/20 blur-3xl" />
@@ -84,10 +84,10 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
         <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-coral/10 blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center gap-6 lg:flex-row lg:gap-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-center gap-6 xl:flex-row xl:items-center xl:gap-12">
         <div
           ref={leftPanelRef}
-          className="relative h-72 w-full max-w-[380px] overflow-hidden rounded-[32px] shadow-2xl sm:h-[420px] lg:h-[500px] lg:rounded-[40px]"
+          className="relative h-72 w-full max-w-[420px] overflow-hidden rounded-[32px] shadow-2xl sm:h-[440px] xl:h-[560px] xl:max-w-[460px] xl:rounded-[40px]"
           style={{ perspective: '1000px' }}
         >
           <img
@@ -100,21 +100,21 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
           <div className="absolute bottom-4 right-4 h-12 w-12 rounded-br-2xl border-b-4 border-r-4 border-coral" />
         </div>
 
-        <div ref={rightPanelRef} className="relative w-full max-w-[500px]" style={{ perspective: '1000px' }}>
+        <div ref={rightPanelRef} className="relative w-full max-w-[620px]" style={{ perspective: '1000px' }}>
           <div
             ref={orbRef}
-            className="absolute -left-2 -top-6 z-20 flex h-16 w-16 items-center justify-center rounded-full bg-panel-green text-3xl shadow-orb sm:-left-6 sm:-top-8 sm:h-20 sm:w-20 sm:text-4xl"
+            className="absolute -left-2 -top-6 z-20 flex h-16 w-16 items-center justify-center rounded-full bg-panel-green text-3xl shadow-orb sm:-left-6 sm:-top-8 sm:h-20 sm:w-20 sm:text-4xl xl:-left-8 xl:-top-10 xl:h-24 xl:w-24 xl:text-5xl"
           >
             {'\u{1F33F}'}
           </div>
 
-          <div className="relative overflow-hidden rounded-[32px] bg-panel-pink p-6 shadow-panel sm:p-8 lg:rounded-[40px] lg:p-10">
+          <div className="relative overflow-hidden rounded-[32px] bg-panel-pink p-6 shadow-panel sm:p-8 xl:min-h-[560px] xl:rounded-[40px] xl:p-12">
             <div className="absolute right-0 top-0 h-32 w-32 translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5" />
             <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-1/2 translate-y-1/2 rounded-full bg-white/5" />
 
             <h1
               ref={headlineRef}
-              className="mb-6 font-poppins text-[clamp(32px,8vw,48px)] font-bold uppercase leading-[1.05] tracking-tight text-white"
+              className="mb-6 font-poppins text-[clamp(32px,8vw,56px)] font-bold uppercase leading-[1.02] tracking-tight text-white"
             >
               {headlineWords.map((word) => (
                 <span key={word} className="word mr-[0.25em] inline-block">
@@ -123,12 +123,12 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
               ))}
             </h1>
 
-            <p ref={subcopyRef} className="mb-8 text-base leading-relaxed text-white/85">
+            <p ref={subcopyRef} className="mb-8 max-w-[48ch] text-base leading-relaxed text-white/85 xl:text-lg">
               A quick, anonymous survey about what young people actually need so we can build support
               that fits your life.
             </p>
 
-            <div ref={featuresRef} className="mb-8 flex flex-wrap gap-3">
+            <div ref={featuresRef} className="mb-8 flex flex-wrap gap-3 xl:gap-4">
               <div className="flex items-center gap-2 rounded-full bg-white/15 px-4 py-2">
                 <LockKeyhole className="h-4 w-4 text-white" />
                 <span className="text-sm font-medium text-white/90">100% Anonymous</span>

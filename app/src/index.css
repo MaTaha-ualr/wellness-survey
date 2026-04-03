@@ -113,7 +113,7 @@
 
   /* Scale buttons */
   .scale-btn {
-    @apply px-2 py-2 rounded-lg border border-white/15 bg-white/5 text-xs text-white/60 transition-all duration-200 flex-1 text-center hover:border-white/30 hover:bg-white/10;
+    @apply flex min-h-[56px] items-center justify-center rounded-lg border border-white/15 bg-white/5 px-2.5 py-2.5 text-center text-xs leading-tight text-white/60 transition-all duration-200 hover:border-white/30 hover:bg-white/10;
   }
   .scale-btn.active {
     @apply border-coral bg-coral/15 text-coral font-semibold;
