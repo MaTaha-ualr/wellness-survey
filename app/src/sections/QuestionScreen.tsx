@@ -82,7 +82,7 @@ export function QuestionScreen({
   return (
     <div
       ref={containerRef}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-navy px-4 pb-24 pt-20 sm:px-6 xl:px-10"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-navy px-4 pb-24 pt-20 sm:px-6 xl:h-screen xl:px-10 xl:pb-20 xl:pt-24"
     >
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
@@ -93,15 +93,15 @@ export function QuestionScreen({
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-stretch gap-6 xl:flex-row xl:items-stretch xl:gap-10">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-stretch gap-6 xl:h-[calc(100vh-11rem)] xl:max-h-[620px] xl:flex-row xl:items-stretch xl:gap-10">
         <div
           ref={imageRef}
-          className={`relative h-72 w-full overflow-hidden rounded-[32px] shadow-2xl sm:h-96 xl:h-[560px] xl:w-[380px] 2xl:w-[420px] ${isImageLeft ? 'xl:order-1' : 'xl:order-2'}`}
+          className={`relative h-72 w-full overflow-hidden rounded-[32px] shadow-2xl sm:h-96 xl:h-full xl:w-[380px] 2xl:w-[420px] ${isImageLeft ? 'xl:order-1' : 'xl:order-2'}`}
         >
           <img src={section.image} alt={section.title} className="h-full w-full object-cover" />
           <div className={`absolute inset-0 ${section.panelColor}/40 mix-blend-multiply`} />
 
-          <div className="absolute left-4 top-4 rounded-full bg-white/90 px-4 py-2 backdrop-blur-sm">
+          <div className="absolute left-4 top-4 rounded-full border border-white/30 bg-white/60 px-4 py-2 backdrop-blur-md shadow-lg shadow-navy/10">
             <span className="text-sm font-bold text-navy">
               Section {sectionIndex + 1} of {totalSections}
             </span>
@@ -113,17 +113,17 @@ export function QuestionScreen({
 
         <div
           ref={panelRef}
-          className={`relative w-full ${isImageLeft ? 'xl:order-2' : 'xl:order-1'} xl:flex-1`}
+          className={`relative w-full ${isImageLeft ? 'xl:order-2' : 'xl:order-1'} xl:h-full xl:flex-1`}
         >
           <div className={`pointer-events-none absolute -top-7 z-30 ${orbOffsetClass} xl:-top-9`}>
             <EmojiOrb emoji={section.emoji} />
           </div>
 
-          <div className={`relative flex min-h-[440px] flex-col overflow-hidden rounded-[32px] ${section.panelColor} p-5 shadow-panel sm:p-6 xl:min-h-[560px] xl:rounded-[40px] xl:p-10`}>
+          <div className={`relative flex min-h-[440px] flex-col overflow-hidden rounded-[32px] ${section.panelColor} p-5 shadow-panel sm:p-6 xl:h-full xl:min-h-0 xl:rounded-[40px] xl:p-10`}>
             <div className="absolute right-0 top-0 h-28 w-28 translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 xl:h-36 xl:w-36" />
             <div className="absolute bottom-0 left-0 h-20 w-20 -translate-x-1/2 translate-y-1/2 rounded-full bg-white/5 xl:h-28 xl:w-28" />
 
-            <div ref={contentRef} className="flex h-full flex-col">
+            <div ref={contentRef} className="flex h-full min-h-0 flex-col">
               <div className={`mb-5 ${headerPaddingClass}`}>
                 <h2
                   className="font-poppins text-[clamp(24px,5vw,42px)] font-bold uppercase leading-tight tracking-tight text-white"
@@ -133,7 +133,7 @@ export function QuestionScreen({
                 <p className="mt-2 text-sm text-white/70 xl:text-base">{section.subtitle}</p>
               </div>
 
-              <div className="custom-scrollbar flex-1 space-y-4 overflow-y-auto pr-1 sm:pr-2 xl:pr-3">
+              <div className="custom-scrollbar flex-1 space-y-4 overflow-y-auto pr-1 sm:pr-2 xl:min-h-0 xl:pr-3">
                 {section.questions.map((question) => (
                   <QuestionCard
                     key={question.id}
