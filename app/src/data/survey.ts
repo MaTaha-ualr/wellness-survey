@@ -55,7 +55,7 @@ export const SURVEY_SECTIONS: SurveySection[] = [
         num: 1,
         text: 'Which age group are you in?',
         type: 'single',
-        options: ['13-14', '15-16', '17-18', '19+'],
+        options: ['13-15', '16-18', '19-21', '22-24', '25+'],
       },
       {
         id: 'q2',
@@ -63,7 +63,7 @@ export const SURVEY_SECTIONS: SurveySection[] = [
         text: 'What gender do you identify with?',
         hint: "Select all that apply - this helps us understand who we're reaching",
         type: 'multi',
-        options: ['Female', 'Male', 'Intersex', 'Non-binary / gender non-conforming', 'Prefer not to say'],
+        options: ['Female', 'Male', 'Non-binary / gender non-conforming', 'Prefer not to say'],
         hasOther: true,
         otherLabel: 'Prefer to self-describe',
       },
